@@ -1,93 +1,529 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benim Sitem</title>
+    <title>Magic Word - Büyülü Kelime Serüveni</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* --- BÜYÜLÜ MOR TONLARI VE NEON RENKLER --- */
+        :root {
+            --dark-magic: #120b29; /* Derin Gece Moru */
+            --mid-magic: #5a189a; /* Canlı Büyücü Moru */
+            --light-magic: #9d4edd; /* Açık Parlak Mor */
+            --neon-pink: #f72585; /* Neon Enerji Pembesi */
+            --magic-gold: #ffcc00; /* İksir Sarısı/Altın */
+            --text-main: #ffffff;
+            --text-muted: #bda8d6;
+            --card-bg: rgba(255, 255, 255, 0.15);
+            --button-blue: #00a8ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background-color: var(--dark-magic);
+            color: var(--text-main);
             min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Fredoka One', cursive;
+            letter-spacing: 2px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- SİHİRLİ ENERJİ BULUTLARI (ARKA PLAN) --- */
+        .magic-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 0;
+            opacity: 0.6;
+            animation: breathe 8s infinite alternate ease-in-out;
+        }
+
+        .blob-1 {
+            background: var(--mid-magic);
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            left: -100px;
+        }
+
+        .blob-2 {
+            background: var(--neon-pink);
+            width: 300px;
+            height: 300px;
+            bottom: 10%;
+            right: -50px;
+            animation-delay: -3s;
+        }
+
+        .blob-3 {
+            background: var(--light-magic);
+            width: 350px;
+            height: 350px;
+            top: 40%;
+            left: 30%;
+            opacity: 0.3;
+            animation-delay: -5s;
+        }
+
+        @keyframes breathe {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+
+            100% {
+                transform: scale(1.2) translate(30px, -30px);
+            }
+        }
+
+        /* --- SİHİRLİ UÇUŞAN HARFLER (ARKA PLAN) --- */
+        .floating-letter {
+            position: absolute;
+            font-family: 'Fredoka One', cursive;
+            color: rgba(255, 204, 0, 0.15);
+            font-size: 4rem;
+            animation: float 6s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .l1 {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+            font-size: 5rem;
+            transform: rotate(-15deg);
+        }
+
+        .l2 {
+            top: 30%;
+            right: 15%;
+            animation-delay: 1.2s;
+            font-size: 3rem;
+            transform: rotate(15deg);
+            color: rgba(247, 37, 133, 0.15);
+        }
+
+        .l3 {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 2.5s;
+            font-size: 6rem;
+            transform: rotate(-20deg);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-25px) rotate(10deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        /* --- HEADER (MENÜ) --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: rgba(18, 11, 41, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-img {
+            max-height: 250px; /* Logo devasa boyutu korundu */
+            margin-top: 15px;
+            margin-bottom: -150px;
+            position: relative;
+            z-index: 105;
+            filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.5));
+            transition: transform 0.3s ease;
+        }
+
+            .logo-img:hover {
+                transform: scale(1.05) rotate(-2deg);
+            }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 12px 25px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+            nav a:hover {
+                border-color: var(--neon-pink);
+                background: rgba(247, 37, 133, 0.1);
+                color: var(--magic-gold);
+                box-shadow: 0 0 15px rgba(247, 37, 133, 0.5);
+                transform: translateY(-3px);
+            }
+
+        /* --- HERO (ANA BÖLÜM - ORTALANMIŞ) --- */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 20px 100px 20px;
+            background-image: url('kutuphane-arkaplan.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            min-height: 60vh;
+        }
+
+            .hero::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, rgba(18, 11, 41, 0.8), rgba(18, 11, 41, 0.4));
+                z-index: 1;
+            }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 5.5rem;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #fff, var(--magic-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 50px;
+            line-height: 1.6;
+            color: #e0d4f5;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        /* Parlayan "Play Now" Butonu */
+        .play-btn {
+            display: inline-block;
+            background: linear-gradient(to bottom, #42e8f6, #0093c4);
+            color: white;
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.2rem;
+            padding: 18px 60px;
+            border-radius: 50px;
+            border: 4px solid var(--magic-gold);
+            box-shadow: 0 0 25px rgba(66, 232, 246, 0.7), inset 0 5px 10px rgba(255, 255, 255, 0.5), inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+
+            .play-btn:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 35px rgba(66, 232, 246, 0.9), inset 0 5px 10px rgba(255, 255, 255, 0.7);
+            }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(66, 232, 246, 0.6);
+            }
+
+            70% {
+                box-shadow: 0 0 0 20px rgba(66, 232, 246, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(66, 232, 246, 0);
+            }
+        }
+
+        /* --- FEATURES (ÖZELLİKLER) --- */
+        .features {
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+            .features h2 {
+                font-size: 3.5rem;
+                margin-bottom: 60px;
+                color: var(--magic-gold);
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 40px 25px;
+            border-radius: 30px;
+            border: 2px solid rgba(157, 78, 221, 0.5);
+            backdrop-filter: blur(15px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .feature-card:hover {
+                transform: translateY(-15px) scale(1.03);
+                border-color: var(--magic-gold);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 20px rgba(255, 183, 3, 0.2);
+                background: rgba(255, 255, 255, 0.25);
+            }
+
+        .feature-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--dark-magic);
+            border: 3px solid var(--magic-gold);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            font-size: 4.5rem;
+            margin: 0 auto 25px auto;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
         }
-        .container {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px 30px;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        h1 {
-            font-size: 3rem;
+
+        .feature-card h3 {
+            font-size: 1.8rem;
             margin-bottom: 15px;
-            background: linear-gradient(45deg, #ffd700, #ff6b6b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--magic-gold);
         }
-        p {
-            font-size: 1.2rem;
-            margin: 20px 0;
-            line-height: 1.6;
-            opacity: 0.9;
+
+        .feature-card p {
+            font-size: 1.15rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+            position: relative;
+            z-index: 1;
         }
-        .social {
-            margin-top: 30px;
+
+        /* --- FOOTER (MAĞAZA BUTONLARI VE LOGOLAR) --- */
+        footer {
+            background: rgba(26, 0, 51, 0.8);
+            padding: 50px 0;
+            text-align: center;
+            border-top: 2px solid var(--mid-magic);
+            position: relative;
+            z-index: 10;
         }
-        .social a {
-            color: white;
-            font-size: 2rem;
-            margin: 0 15px;
-            transition: 0.3s;
-            text-decoration: none;
+
+        .store-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
         }
-        .social a:hover {
-            transform: translateY(-5px);
-            opacity: 0.8;
-        }
-        .btn {
-            display: inline-block;
-            margin-top: 25px;
+
+        .store-btn {
+            background: #000;
+            border: 1px solid #fff;
             padding: 12px 30px;
-            background: #ff6b6b;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
+            border-radius: 15px;
+            font-size: 1.2rem;
             font-weight: 600;
-            transition: 0.3s;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
         }
-        .btn:hover {
-            background: #ff5252;
-            transform: scale(1.05);
+
+            .store-btn:hover {
+                background: #222;
+                transform: scale(1.05);
+                box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+            }
+
+        .store-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 12px;
+            object-fit: contain;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 1rem;
+            color: var(--light-magic);
+            transition: color 0.3s;
+        }
+
+            .footer-links a:hover {
+                color: var(--neon-pink);
+            }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #8b5fbf;
+        }
+
+        @media (max-width: 768px) {
+            .logo-img {
+                max-height: 100px;
+                margin-bottom: -20px;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                display: none;
+            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Merhaba! 👋</h1>
-        <p>Ben Berfin Çiftçi</p>
-        <p>Burası benim yeni web sitem. Henüz yapım aşamasında ama çok yakında harika şeyler gelecek! 🚀</p>
-        
-        <div class="social">
-            <a href="https://instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
+
+    <div class="magic-blob blob-1"></div>
+    <div class="magic-blob blob-2"></div>
+    <div class="magic-blob blob-3"></div>
+
+    <div class="floating-letter l1">M</div>
+    <div class="floating-letter l2">W</div>
+    <div class="floating-letter l3">B</div>
+
+    <header>
+        <div class="logo">
+            <img src="magic-word-logo.png" alt="Magic Word Logo" class="logo-img">
         </div>
-        
-        <a href="mailto:berfincft11@gmail.com" class="btn">Bana Yaz ✉️</a>
-    </div>
+        <nav>
+            <ul>
+                <li><a href="#ozellikler">FEATURES</a></li>
+                <li><a href="#indir">DOWNLOAD</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>BÜYÜLÜ SÖZLERİN<br>GÜCÜNÜ KEŞFEDİN!</h1>
+            <p>Harfleri birleştir, gizli şifreleri çöz ve en güçlü kelime büyücüsü sen ol! Eğlencenin ve zekanın sihirli karışımı parmaklarının ucunda.</p>
+            <a href="#indir" class="play-btn">PLAY NOW</a>
+        </div>
+    </section>
+
+    <section id="ozellikler" class="features container">
+        <h2>FEATURES</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔮</div>
+                <h3>Şaşırtıcı Bilmeceler</h3>
+                <p>Sıradan bulmacaları unut! Zekanı gıdıklayacak özel bilmecelerle harfleri dans ettir.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📜</div>
+                <h3>Zorlu Bölümler</h3>
+                <p>Klasik çapraz bulmaca bölümlerinin yanı sıra zihnini zorlayacak yüzlerce bölüm.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧪</div>
+                <h3>Güçlü İksirler</h3>
+                <p>Takıldığın yerlerde sihirli roketler ve ipucu iksirleriyle en zor bölümleri bile saniyeler içinde geç.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3>Gizli Hazineler</h3>
+                <p>Tahtada olmayan ama türettiğin gizli kelimeleri bul, ekstra altın keselerini anında kap!</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="indir">
+        <div class="container">
+            <h2 style="color: white; margin-bottom: 30px; text-transform: uppercase;">DOWNLOAD NOW</h2>
+
+            <div class="store-buttons">
+                <a href="https://apps.apple.com/us/app/magic-word/id6756522605" target="_blank" class="store-btn">
+                    <img src="apple-logo.png" alt="Apple Logo" class="store-icon">
+                    App Store
+                </a>
+
+                <a href="https://play.google.com/store/apps/details?id=com.SnowdropGames.MagicWord" target="_blank" class="store-btn">
+                    <img src="google-logo.png" alt="Google Play Logo" class="store-icon">
+                    Google Play
+                </a>
+            </div>
+
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+
+            <p class="copyright">&copy; 2026 Snowdrop Games. Sihirli Kelimeler Sunar.</p>
+        </div>
+    </footer>
+
 </body>
 </html>
