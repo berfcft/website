@@ -9,11 +9,11 @@
     <style>
         /* --- BÜYÜLÜ MOR TONLARI VE NEON RENKLER --- */
         :root {
-            --dark-magic: #120b29; /* Derin Gece Moru */
-            --mid-magic: #5a189a; /* Canlı Büyücü Moru */
-            --light-magic: #9d4edd; /* Açık Parlak Mor */
-            --neon-pink: #f72585; /* Neon Enerji Pembesi */
-            --magic-gold: #ffcc00; /* İksir Sarısı/Altın */
+            --dark-magic: #120b29;
+            --mid-magic: #5a189a;
+            --light-magic: #9d4edd;
+            --neon-pink: #f72585;
+            --magic-gold: #ffcc00;
             --text-main: #ffffff;
             --text-muted: #bda8d6;
             --card-bg: rgba(255, 255, 255, 0.15);
@@ -164,7 +164,7 @@
         }
 
         .logo-img {
-            max-height: 250px; /* Logo devasa boyutu korundu */
+            max-height: 250px;
             margin-top: 15px;
             margin-bottom: -150px;
             position: relative;
@@ -426,20 +426,86 @@
             color: #8b5fbf;
         }
 
+        /* =========================================================
+           TAM BURASI GÜNCELLENDİ: TELEFONLAR İÇİN MOBİL UYUM (RESPONSIVE)
+           ========================================================= */
         @media (max-width: 768px) {
-            .logo-img {
-                max-height: 100px;
-                margin-bottom: -20px;
+            /* Header ve Logo Ortalaması */
+            header {
+                justify-content: center; /* Logoyu ortalar */
+                padding: 15px;
             }
 
-            .hero h1 {
-                font-size: 3.5rem;
+            .logo-img {
+                max-height: 120px; /* Logo telefonda çok yer kaplamasın diye küçültüldü */
+                margin-top: 5px;
+                margin-bottom: -50px;
             }
 
             nav ul {
+                display: none; /* Menü linkleri telefonda gizlendi */
+            }
+
+            /* Ana Ekran (Hero) Metin Boyutları */
+            .hero {
+                padding: 100px 15px 60px 15px; /* Boşluklar azaltıldı */
+                min-height: auto;
+            }
+
+                .hero h1 {
+                    font-size: 2.5rem; /* O devasa 5.5rem yazı telefona sığdırıldı */
+                    margin-bottom: 15px;
+                }
+
+                .hero p {
+                    font-size: 1.1rem;
+                    margin-bottom: 30px;
+                }
+
+            /* Play Now Butonu */
+            .play-btn {
+                font-size: 1.5rem;
+                padding: 15px 40px;
+            }
+
+            /* Özellikler (Features) Kısmı */
+            .features {
+                padding: 60px 0;
+            }
+
+                .features h2 {
+                    font-size: 2.5rem;
+                    margin-bottom: 40px;
+                }
+
+            .feature-card {
+                padding: 30px 20px;
+            }
+
+            /* Footer Mağaza Butonları (Yan yana değil, alt alta dizeceğiz) */
+            .store-buttons {
                 flex-direction: column;
-                gap: 10px;
-                display: none;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .store-btn {
+                width: 100%;
+                max-width: 250px; /* Butonların genişliği telefon için ayarlandı */
+                font-size: 1.1rem;
+            }
+
+            /* Uçuşan Harfler (Telefonda yazıyı engellememesi için küçültüldü) */
+            .floating-letter.l1 {
+                font-size: 2.5rem;
+            }
+
+            .floating-letter.l2 {
+                font-size: 1.8rem;
+            }
+
+            .floating-letter.l3 {
+                font-size: 3rem;
             }
         }
     </style>
