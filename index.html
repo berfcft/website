@@ -63,9 +63,9 @@
         }
 
         .logo-img {
-            max-height: 180px; /* Logo devasa boyuta getirildi */
+            max-height: 180px; 
             filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.6)); transition: transform 0.3s ease;
-            margin-bottom: -40px; /* Logonun menü çubuğundan aşağı taşması için eklendi */
+            margin-bottom: -40px; 
             position: relative; z-index: 105;
         }
         .logo-img:hover { transform: scale(1.05); }
@@ -88,7 +88,13 @@
         .hero p { font-size: 1.5rem; margin-bottom: 40px; color: #e0d4f5; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
 
         /* --- ORTAK BÖLÜM TASARIMLARI (SECTION) --- */
-        section { padding: 100px 0; position: relative; z-index: 10; }
+        section { 
+            padding: 100px 0; 
+            position: relative; 
+            z-index: 10; 
+            /* İŞTE BURASI: Menü tıklandığında başlığın ezilmesini engelleyen güvenlik mesafesi */
+            scroll-margin-top: 130px; 
+        }
         .section-title { font-size: 3.5rem; text-align: center; margin-bottom: 60px; color: var(--magic-gold); text-shadow: 2px 2px 4px rgba(0,0,0,0.3); text-transform: uppercase; }
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 40px; }
@@ -142,7 +148,7 @@
         .footer-links a:hover { color: var(--magic-gold); }
 
         /* ==========================================================
-           TAM BURASI GÜNCELLENDİ: TELEFONLAR İÇİN MOBİL UYUM (RESPONSIVE)
+           TELEFONLAR İÇİN MOBİL UYUM (RESPONSIVE)
            ========================================================== */
         @media (max-width: 768px) {
             header { flex-direction: column; padding: 15px; text-align: center;}
@@ -272,11 +278,11 @@
             <p style="font-size: 1.2rem; color: #fff; margin-top: 10px;">Oyunu hemen aşağıdan indir ve hiçbir kod girmeden anında <strong>1000 SİHİRLİ ALTIN</strong> hediye kazan!</p>
             
             <div class="store-buttons">
-                <a href="https://apps.apple.com/us/app/magic-word/id6756522605" target="_blank" class="store-btn">
+                <a href="https://apps.apple.com/us/app/magic-word/id6756522605?pt=123456&ct=bonus1000&mt=8" target="_blank" class="store-btn">
                     <img src="apple-logo.png" alt="Apple" class="store-icon"> App Store
                 </a>
                 
-                <a href="https://play.google.com/store/apps/details?id=com.SnowdropGames.MagicWord" target="_blank" class="store-btn">
+                <a href="https://play.google.com/store/apps/details?id=com.SnowdropGames.MagicWord&referrer=utm_source%3Dwebsite%26utm_campaign%3Dbonus1000" target="_blank" class="store-btn">
                     <img src="google-logo.png" alt="Google Play" class="store-icon"> Google Play
                 </a>
             </div>
