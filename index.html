@@ -20,7 +20,13 @@
             --card-border: rgba(157, 78, 221, 0.5);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        /* İŞTE BURASI: Tüm sayfadaki tıklamaların menünün altında ezilmesini engelleyen kesin çözüm */
+        html {
+            scroll-padding-top: 140px; 
+            scroll-behavior: smooth;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -88,13 +94,7 @@
         .hero p { font-size: 1.5rem; margin-bottom: 40px; color: #e0d4f5; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
 
         /* --- ORTAK BÖLÜM TASARIMLARI (SECTION) --- */
-        section { 
-            padding: 100px 0; 
-            position: relative; 
-            z-index: 10; 
-            /* İŞTE BURASI: Menü tıklandığında başlığın ezilmesini engelleyen güvenlik mesafesi */
-            scroll-margin-top: 130px; 
-        }
+        section { padding: 100px 0; position: relative; z-index: 10; }
         .section-title { font-size: 3.5rem; text-align: center; margin-bottom: 60px; color: var(--magic-gold); text-shadow: 2px 2px 4px rgba(0,0,0,0.3); text-transform: uppercase; }
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 40px; }
